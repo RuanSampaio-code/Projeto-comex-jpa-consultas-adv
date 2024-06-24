@@ -1,18 +1,19 @@
 package br.alura.comex.interfaces;
 
 import br.alura.comex.models.Categoria;
+import br.alura.comex.models.Produto;
 
 import java.util.List;
 
 public interface IntProdutoDao {
 
-    void cadastra(Categoria categoria);
+    void cadastra(Produto produto);
 
-    List<Categoria> listarTodas();
+    List<Produto> listarTodas();
 
-    Categoria buscarID(Long id);
+    Produto buscarID(Long id);
 
-    void alterar(Long id, Categoria categoriaAlterar);
+    void alterar(Long id, Produto produto);
 
     void remover(Long id);
 }

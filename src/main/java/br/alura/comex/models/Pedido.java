@@ -22,8 +22,9 @@ public class Pedido {
     private TipoDeDescontoEnum tipoDesconto;
     private BigDecimal valorTotal = BigDecimal.ZERO;
 
-    @OneToMany(mappedBy = "pedido", fetch = fec)
-    private List<ItemDePedido> itens = new ArrayList<>()
+
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
+    private List<ItemDePedido> itens = new ArrayList<>();
     @ManyToOne
     private Cliente cliente;
 
@@ -75,6 +76,14 @@ public class Pedido {
         this.cliente = cliente;
     }
 
+    public List<ItemDePedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemDePedido> itens) {
+        this.itens = itens;
+    }
+
 
     //    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 //    @Column(nullable = false)
@@ -84,6 +93,11 @@ public class Pedido {
 //        this.cliente = cliente;
 //        this.tipoDesconto = TipoDeDescontoEnum.NENHUM;
 //    }
+
+    public void adicionaItem(ItemDePedido item){
+        this.itens.add(item);
+        item.setPedido(this);
+    }
 
 
     @Override
