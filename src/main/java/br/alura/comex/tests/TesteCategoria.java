@@ -5,15 +5,18 @@ import br.alura.comex.services.CategoriaService;
 import br.alura.comex.util.JPAUUtil;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Scanner;
 
 public class TesteCategoria {
-    private final static CategoriaService categoriaService = new CategoriaService();
+    private  static CategoriaService categoriaService;
     private static Scanner teclado = new Scanner(System.in);
     public static void main(String[] args) {
 
         EntityManager em = JPAUUtil.getEntityManager();
         System.out.println("BEM VINDOS AO PROJETO COMEX - CADASTRO DE CATEGORIAS");
+
+        categoriaService = new CategoriaService(em);
         var opc = exibirMenu();
 
         while ( opc != 6){
@@ -63,15 +66,17 @@ public class TesteCategoria {
         categoriaService.buscarID(id);
         teclado.nextLine();
 
-        System.out.println("Digite o Nome: ");
+        System.out.println("Digite o novo nome: ");
         String nome = teclado.nextLine();
 
-        Categoria categoriaAlterada = new Categoria( nome);
+        System.out.println("Digite a nova descrisao: ");
+        String descr = teclado.nextLine();
+
+        Categoria categoriaAlterada = new Categoria( nome,descr);
 
         //clienteService.efetuaCadastroDeCliente( new Cliente( null,cpf,  nome,  email,  telefone,  logradouro,  bairro,  cidade,  estado,  cep));
         categoriaService.alteracaoDeCategoria(id,categoriaAlterada);
         System.out.printf("Cliente altrado com sucesso");
-
 
 
     }
@@ -82,7 +87,6 @@ public class TesteCategoria {
         Long id = teclado.nextLong();
 
         categoriaService.removerCategoria(id);
- 
 
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         teclado.next();
@@ -96,11 +100,14 @@ public class TesteCategoria {
         System.out.println("Digite o Nome: ");
         String nome = teclado.nextLine();
 
-        categoriaService.efetuaCadastroDeCategoria(new Categoria(null, nome));
+        System.out.println("Digite a descrição: ");
+        String desc = teclado.nextLine();
+
+        categoriaService.efetuaCadastroDeCategoria(new Categoria( nome, desc));
     }
 
     private static void listarTodasCategorias() {
-        var listaDeCategorias = categoriaService.listarCadastroDeCategorias();
+        List<Categoria> listaDeCategorias = categoriaService.listarCadastroDeCategorias();
 
         listaDeCategorias.stream()
                 .forEach(System.out::println);
@@ -114,11 +121,10 @@ public class TesteCategoria {
         System.out.println("Digite o id do cliente que voce procura:");
         Long id = teclado.nextLong();
         //1 Cliente cliente = clienteService.buscaID(id);
-        Categoria categoria = categoriaService.buscaID(id);
+        Categoria categoria = categoriaService.buscarID(id);
 
         System.out.println("ID: " + categoria.getId());
         System.out.println("NOME: " + categoria.getNome());
-
 
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         teclado.next();

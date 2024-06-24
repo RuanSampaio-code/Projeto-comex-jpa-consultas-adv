@@ -10,7 +10,7 @@ public class ProdutoDao implements IntProdutoDao {
 
     private EntityManager manager;
 
-    public ProdutoDao(EntityManager entityManager) {
+    public ProdutoDao(EntityManager manager) {
         this.manager = manager ;
     }
 
@@ -64,18 +64,19 @@ public class ProdutoDao implements IntProdutoDao {
             Produto produtoExistente = buscarID(id);
 
             if (produtoExistente == null) {
-                System.out.println("Categoria não encontrada com o ID informado.");
+                System.out.println("produto não encontrada com o ID informado.");
             } else {
                 // Mesclar (merge) a entidade atualizada com a existente no contexto persistente
                 // Isso vai atualizar a categoria no banco de dados
                 produtoExistente.setNome(produtoAlterar.getNome());
                 produtoExistente.setDescricao(produtoAlterar.getDescricao());
+                produtoExistente.setPreco(produtoAlterar.getPreco());
 
                 manager.merge(produtoExistente);
                 manager.getTransaction().commit();
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao tentar atualizar a categoria: " + e.getMessage());
+            System.out.println("Ocorreu um erro ao tentar atualizar o produto: " + e.getMessage());
             manager.getTransaction().rollback(); // Rollback da transação em caso de erro
         }
 

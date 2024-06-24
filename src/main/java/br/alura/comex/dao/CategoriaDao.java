@@ -46,12 +46,6 @@ public class CategoriaDao implements IntCategoriaDao {
     public Categoria buscarID(Long id) {
         var categoriaEncontrada = manager.find(Categoria.class, id);
 
-//        if (categoriaEncontrada==null){
-//            System.out.println("Categoria nao encontradas");
-//
-//        }
-
-        //System.out.println(categoriaEncontrada);
         return categoriaEncontrada;
     }
 
@@ -84,6 +78,23 @@ public class CategoriaDao implements IntCategoriaDao {
 
     @Override
     public void remover(Long id) {
+
+        try {
+            manager.getTransaction().begin();
+
+            Categoria categoriaDelete = buscarID(id);
+
+            if (categoriaDelete == null) {
+                System.out.println("Categoria não encontrada com o ID informado.");
+            } else {
+                manager.remove(categoriaDelete);
+                manager.getTransaction().commit();
+                System.out.println("Exclusão realizada com sucesso.");
+            }
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao tentar excluir a categoria: " + e.getMessage());
+            manager.getTransaction().rollback(); // Rollback da transação em caso de erro
+        }
 
     }
 }

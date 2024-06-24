@@ -3,6 +3,7 @@ package br.alura.comex.dao;
 import br.alura.comex.interfaces.IntClienteDao;
 import br.alura.comex.models.Categoria;
 import br.alura.comex.models.Cliente;
+import br.alura.comex.models.Pedido;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -108,6 +109,22 @@ public class ClienteDao implements IntClienteDao {
 
     @Override
     public void remover(Long id) {
+        try {
+            manager.getTransaction().begin();
+
+            Cliente clienteDelete = buscarID(id);
+
+            if (clienteDelete == null) {
+                System.out.println("Cliente não encontrada com o ID informado.");
+            } else {
+                manager.remove(clienteDelete);
+                manager.getTransaction().commit();
+                System.out.println("Exclusão realizada com sucesso.");
+            }
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao tentar excluir a categoria: " + e.getMessage());
+            manager.getTransaction().rollback(); // Rollback da transação em caso de erro
+        }
 
     }
 }

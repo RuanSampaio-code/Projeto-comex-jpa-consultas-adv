@@ -8,7 +8,7 @@ public class JPAUUtil {
     // Declara uma constante estática e final que armazena a instância da fábrica de gerenciadores de entidades
     // A fábrica de gerenciadores de entidades é criada utilizando a unidade de persistência "loja"
     private static final EntityManagerFactory FACTORY = Persistence
-            .createEntityManagerFactory("loja");
+            .createEntityManagerFactory("comex");
 
     // Método público e estático que retorna um novo EntityManager
     public static EntityManager getEntityManager() {

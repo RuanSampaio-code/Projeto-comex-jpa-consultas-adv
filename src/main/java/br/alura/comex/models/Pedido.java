@@ -99,7 +99,6 @@ public class Pedido {
         item.setPedido(this);
     }
 
-
     @Override
     public String toString() {
         return "Pedido{" +
@@ -108,12 +107,13 @@ public class Pedido {
                 ", desconto=" + desconto +
                 ", tipoDesconto=" + tipoDesconto +
                 ", valorTotal=" + valorTotal +
+                ", itens=" + itens +
                 ", cliente=" + cliente +
-                ", itens=" + itensSummary() +
                 '}';
     }
 
-//    private String itensSummary() {
+
+    //    private String itensSummary() {
 //        if (itens == null) {
 //            return "[]";
 //        }
