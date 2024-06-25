@@ -17,7 +17,9 @@ public class Produto {
     private double preco;
 
     @ManyToMany
-    private List<Categoria> categorias = new ArrayList<>();
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+    //private List<Categoria> categorias = new ArrayList<>();
 
 
     public Produto() {
@@ -30,6 +32,8 @@ public class Produto {
     public Long getId() {
         return id;
     }
+
+
 
     public Produto(String nome, String descricao, double preco) {
 
