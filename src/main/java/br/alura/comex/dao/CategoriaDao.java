@@ -4,6 +4,7 @@ import br.alura.comex.interfaces.IntCategoriaDao;
 import br.alura.comex.models.Categoria;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
@@ -96,5 +97,16 @@ public class CategoriaDao implements IntCategoriaDao {
             manager.getTransaction().rollback(); // Rollback da transação em caso de erro
         }
 
+    }
+
+    public Categoria buscarPorNome(String nome) {
+        String jpql = "SELECT c FROM Categoria c WHERE c.nome = :nome";
+        try {
+            return manager.createQuery(jpql, Categoria.class)
+                    .setParameter("nome", nome)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Retorne null se nenhum resultado for encontrado
+        }
     }
 }

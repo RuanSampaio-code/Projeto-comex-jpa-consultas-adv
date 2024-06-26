@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table (name = "pedidos")
@@ -94,7 +95,7 @@ public class Pedido {
 //        this.tipoDesconto = TipoDeDescontoEnum.NENHUM;
 //    }
 
-    public void adicionaItem(ItemDePedido item){
+    public void adicionaItemAoPedido(ItemDePedido item){
         this.itens.add(item);
         item.setPedido(this);
     }
@@ -107,21 +108,21 @@ public class Pedido {
                 ", desconto=" + desconto +
                 ", tipoDesconto=" + tipoDesconto +
                 ", valorTotal=" + valorTotal +
-                ", itens=" + itens +
+                ", itens=" + listaItens()  +
                 ", cliente=" + cliente +
                 '}';
     }
 
 
-    //    private String itensSummary() {
-//        if (itens == null) {
-//            return "[]";
-//        }
-//        return itens.stream()
-//                .map(item -> "ItemDePedido{id=" + item.getPrecoUnitario() +
-//                        ", produtoNome='" + item.getProduto().getNome() +
-//                        "', quantidade=" + item.getQuantidade() +
-//                        "', desconto=" + item.getDesconto() + "}")
-//                .collect(Collectors.joining(", ", "[", "]"));
-//    }
+        private String listaItens() {
+            if (itens == null) {
+                return "[]";
+            }
+            return itens.stream()
+                    .map(item -> "ItemDePedido{id=" + item.getPrecoUnitario() +
+                            ", produtoNome='" + item.getProduto().getNome() +
+                            "', quantidade=" + item.getQuantidade() +
+                            "', desconto=" + item.getDesconto() + "}")
+                    .collect(Collectors.joining(", ", "[", "]"));
+        }
 }

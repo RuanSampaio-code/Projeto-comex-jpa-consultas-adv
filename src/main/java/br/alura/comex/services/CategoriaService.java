@@ -38,5 +38,16 @@ public class CategoriaService {
         this.categoriaDao.alterar(id, categoriaAlterada);
     }
 
+    public Categoria BuscaPorNomeCategoria(String nome){
+
+        Categoria categoria = categoriaDao.buscarPorNome(nome);
+        if (categoria == null){
+            System.out.println("Categoria nao encontrada");
+            return categoria;
+        }
+
+        return categoria;
+    }
+
 
 }

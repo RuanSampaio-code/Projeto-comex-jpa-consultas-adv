@@ -36,10 +36,10 @@ public class TestePedido {
                     break;
                 case 2:
                    criarPedido();
-//                    break;
-//                case 3:
-//                    deletarPedido();
-//                    break;
+                    break;
+                case 3:
+                    deletarPedido();
+                    break;
 //                case 4:
 //                    atualizarPedido();
 //                    break;
@@ -132,14 +132,22 @@ public class TestePedido {
             item.setPrecoUnitario(precoUnitario);
             item.setPedido(pedido);
 
-            pedido.getItens().add(item);
+            pedido.adicionaItemAoPedido(item);
             pedido.setValorTotal(pedido.getValorTotal().add(precoUnitario.multiply(BigDecimal.valueOf(quantidade))));
-
 
             pedidoService.efetuaCadastroDePedidos(pedido);
         }
 
+    }
 
+    public static void deletarPedido(){
+        System.out.println("Digite o id do pedido que deseja deletar:");
+        Long id = teclado.nextLong();
+
+        pedidoService.removerPedido(id);
+
+        System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
+        teclado.next();
 
 
     }

@@ -19,7 +19,7 @@ public class TesteCategoria {
         categoriaService = new CategoriaService(em);
         var opc = exibirMenu();
 
-        while ( opc != 6){
+        while ( opc != 7){
             switch (opc) {
                 case 1:
                     listarTodasCategorias();
@@ -36,6 +36,9 @@ public class TesteCategoria {
                 case 5:
                     buscarCategoria();
                     break;
+                case 6:
+                    buscaPeloNome();
+                    break;
             }
 
             opc = exibirMenu();
@@ -51,7 +54,8 @@ public class TesteCategoria {
                 3 - Deletar uma Categoria
                 4 - Atualizar uma Categoria
                 5 - Listar uma Categoria
-                6 - Finalizar operacoes
+                6 - Buscar catgoria por nome
+                7 - Finalizar operacoes
        
                 """);
 
@@ -118,7 +122,7 @@ public class TesteCategoria {
     }
 
     private static void buscarCategoria() {
-        System.out.println("Digite o id do cliente que voce procura:");
+        System.out.println("Digite o id da categoria que voce procura:");
         Long id = teclado.nextLong();
         //1 Cliente cliente = clienteService.buscaID(id);
         Categoria categoria = categoriaService.buscarID(id);
@@ -129,6 +133,15 @@ public class TesteCategoria {
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         teclado.next();
 
+    }
+
+    public static void buscaPeloNome(){
+        teclado.nextLine();
+        System.out.println("Digite o nome da categoria que voce procura:");
+        String nome = teclado.nextLine();
+
+        Categoria categoria = categoriaService.BuscaPorNomeCategoria(nome);
+        System.out.println(categoria);
     }
 
 }

@@ -15,4 +15,8 @@ public interface IntCategoriaDao {
     void alterar(Long id, Categoria categoriaAlterar);
 
     void remover(Long id);
+
+    Categoria buscarPorNome(String nome);
+
+
 }
