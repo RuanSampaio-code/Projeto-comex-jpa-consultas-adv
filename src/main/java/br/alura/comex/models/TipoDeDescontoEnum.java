@@ -2,5 +2,5 @@ package br.alura.comex.models;
 
 public enum TipoDeDescontoEnum {
 
-    FIDELIDADE,ENUM;
+    FIDELIDADE,NENHUM;
 }

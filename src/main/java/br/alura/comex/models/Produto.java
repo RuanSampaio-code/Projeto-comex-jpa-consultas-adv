@@ -18,9 +18,16 @@ public class Produto {
 
     @ManyToMany
     @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
-    //private List<Categoria> categorias = new ArrayList<>();
+    //private Categoria categoria;
+    private List<Categoria> categorias = new ArrayList<>();
 
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 
     public Produto() {
 

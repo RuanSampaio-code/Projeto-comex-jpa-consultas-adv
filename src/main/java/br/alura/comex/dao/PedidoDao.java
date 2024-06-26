@@ -18,8 +18,16 @@ public class PedidoDao implements IntPedidoDao {
 
     @Override
     public void cadastra(Pedido pedido) {
+        // Inicia uma transação no EntityManager
+        manager.getTransaction().begin();
 
+        // Persiste a entidade Categoria no banco de dados
         manager.persist(pedido);
+
+        // Confirma a transação, aplicando todas as operações de persistência
+        manager.getTransaction().commit();
+
+        System.out.println("Cadastro realizado com sucesso");
 
     }
 
