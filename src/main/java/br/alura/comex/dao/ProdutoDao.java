@@ -102,4 +102,17 @@ public class ProdutoDao implements IntProdutoDao {
         }
 
     }
+
+    public List<Produto> listarPelaCategoria(String categoria){
+        String jpql = "SELECT p FROM Produto p " +
+                "JOIN p.categorias c " +
+                "WHERE c.nome LIKE :categoria ORDER BY p.nome ASC";
+
+        return manager.createQuery(jpql, Produto.class)
+                .setParameter("categoria", "%"+categoria+"%")
+                .getResultList();
+
+    }
+
+
 }

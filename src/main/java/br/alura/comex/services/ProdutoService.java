@@ -38,5 +38,9 @@ public class ProdutoService {
         this.produtoDao.alterar(id, produtAlterada);
     }
 
+    public List<Produto> listarPelaCategoria(String categoria){
+
+        return  this.produtoDao.listarPelaCategoria(categoria);
+    }
 
 }

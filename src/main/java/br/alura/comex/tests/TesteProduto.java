@@ -21,7 +21,7 @@ public class TesteProduto {
         produtoService = new ProdutoService(em);
         var opc = exibirMenu();
 
-        while ( opc != 6){
+        while ( opc != 7){
             switch (opc) {
                 case 1:
                     listarTodasProdutos();
@@ -37,6 +37,9 @@ public class TesteProduto {
                     break;
                 case 5:
                     buscarProduto();
+                    break;
+                case 6:
+                    listarPelaCategoria();
                     break;
             }
 
@@ -140,6 +143,16 @@ public class TesteProduto {
 
         System.out.println("========================================");
         System.out.println();
+    }
+
+    private static void listarPelaCategoria(){
+        System.out.println("Vamos listar pela categoria, digite o nome de UMA cagtegoria");
+        String categoria = teclado.nextLine();
+        teclado.nextLine();
+        List<Produto> produtos = produtoService.listarPelaCategoria(categoria);
+
+        produtos.stream()
+                .forEach(System.out::println);
     }
 
 
